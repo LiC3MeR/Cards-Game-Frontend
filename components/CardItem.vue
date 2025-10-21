@@ -21,16 +21,18 @@
       </div>
       
       <!-- Оверлей с информацией (только если есть изображение) -->
-      <div v-if="hasValidImage && !imageError" class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      <div v-if="hasValidImage && !imageError" class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
       
-      <div class="absolute top-2 right-2 text-xs font-bold bg-black/60 px-2 py-1 rounded backdrop-blur-sm">
-        ⚡{{ card.power }}
-      </div>
-      <!-- Редкость бейдж -->
-      <div class="absolute top-2 left-2">
-        <span :class="rarityBadgeClass" class="text-xs">
+      <!-- Редкость бейдж - вверху слева -->
+      <div class="absolute top-1 left-1">
+        <span class="text-xl drop-shadow-lg">
           {{ getRarityEmoji }}
         </span>
+      </div>
+      
+      <!-- Мощь - внизу справа (не пересекается с редкостью) -->
+      <div class="absolute bottom-1 right-1 bg-black/90 px-2 py-1 rounded-lg backdrop-blur-sm border border-yellow-400/30 shadow-lg">
+        <span class="text-xs font-black text-yellow-400">⚡{{ card.power }}</span>
       </div>
     </div>
     <h3 class="font-bold text-sm text-white truncate">{{ card.name }}</h3>
