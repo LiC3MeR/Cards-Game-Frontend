@@ -22,9 +22,9 @@
         <div 
           v-for="pack in packs" 
           :key="pack.id"
-          class="glass-effect rounded-xl p-6 hover:shadow-xl transition-all"
+          class="glass-effect rounded-xl p-4 hover:shadow-xl transition-all overflow-hidden"
         >
-          <div class="flex items-start gap-4">
+          <div class="flex flex-col sm:flex-row items-start gap-4">
             <!-- Изображение пака -->
             <div class="w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20">
               <img 
@@ -39,36 +39,45 @@
               </div>
             </div>
             
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-white mb-1">{{ pack.name }}</h3>
-              <p class="text-gray-300 text-sm mb-3">{{ pack.description }}</p>
-              <div class="flex items-center gap-2 mb-3">
-                <span class="text-sm text-gray-400">{{ pack.cardCount }} карт</span>
+            <div class="flex-1 min-w-0 w-full">
+              <!-- Название -->
+              <h3 class="text-lg sm:text-xl font-bold text-white mb-2 break-words">{{ pack.name }}</h3>
+              
+              <!-- Описание полностью -->
+              <p class="text-gray-300 text-sm mb-3 break-words leading-relaxed">{{ pack.description }}</p>
+              
+              <!-- Инфо -->
+              <div class="flex flex-wrap items-center gap-2 mb-3 text-sm">
+                <span class="text-gray-400">{{ pack.cardCount }} карт</span>
                 <button 
                   @click="showPackPreview(pack)"
                   class="text-sm text-purple-400 hover:text-purple-300 underline"
                 >
-                  👁️ Посмотреть карты
+                  👁️ Посмотреть
                 </button>
               </div>
-              <div class="flex items-center gap-3">
+              
+              <!-- Кнопки - адаптивные -->
+              <div class="flex flex-wrap gap-2">
                 <button 
                   v-if="pack.coinPrice > 0"
                   @click="openPack(pack.id)"
                   :disabled="balance.coins < pack.coinPrice || opening"
-                  class="btn-primary flex items-center gap-2"
+                  class="btn-primary flex items-center gap-1 text-sm sm:text-base px-3 sm:px-6 py-2 sm:py-3"
                 >
-                  <span>🪙 {{ pack.coinPrice }}</span>
-                  <span>Открыть</span>
+                  <span>🪙</span>
+                  <span>{{ pack.coinPrice }}</span>
+                  <span class="hidden sm:inline">Открыть</span>
                 </button>
                 <button 
                   v-if="pack.gemPrice > 0"
                   @click="openPack(pack.id)"
                   :disabled="balance.gems < pack.gemPrice || opening"
-                  class="btn-primary flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
+                  class="btn-primary flex items-center gap-1 text-sm sm:text-base px-3 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
                 >
-                  <span>💎 {{ pack.gemPrice }}</span>
-                  <span>Открыть</span>
+                  <span>💎</span>
+                  <span>{{ pack.gemPrice }}</span>
+                  <span class="hidden sm:inline">Открыть</span>
                 </button>
               </div>
             </div>
